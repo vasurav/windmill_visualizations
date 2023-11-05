@@ -40,7 +40,7 @@ fluidPage(
                      column(6,plotlyOutput("plot_real_vs_expected_team")),
                      column(6,plotlyOutput("plot_ranking_team"))
                      ),
-                 dataTableOutput("teams_games_table")
+                 dataTableOutput("team_games_table")
         )
     )
 )
