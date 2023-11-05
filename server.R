@@ -95,7 +95,6 @@ function(input, output, session) {
     })
     
     output$plot_real_vs_expected_overview <- renderPlotly({
-        print("plotting real_vs_expected_overview")
         game_ranking_combined() %>%
             plot_real_vs_expected()
     })
