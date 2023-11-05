@@ -28,8 +28,6 @@ function(input, output, session) {
     })
     
     game_ranking_combined <- reactive({
-        print("Calculating game_ranking_combined")
-        
         game_data %>%
             filter(Division == input$division,
                    Round <= input$round) %>%
@@ -54,22 +52,31 @@ function(input, output, session) {
     })
     
     game_ranking_one_team <- reactive({
-        print("Calculating game_ranking_one_team")
-        game_ranking_combined() %>% 
-            filter(Division == input$division) %>% 
-            filter(Team_Winner == input$team | Team_Loser == input$team) %>% 
+        game_data %>%
+            filter(Division == input$division,
+                   Round <= input$round) %>%
+            filter(Team_1 == input$team | Team_2 == input$team) %>%
             mutate(Team              = input$team,
                    Score             = if_else(Team_1 == input$team, Score_1, Score_2),
                    Opponent          = if_else(Team_1 == input$team, Team_2, Team_1),
-                   Score_Opponent    = if_else(Team_1 == input$team, Score_2, Score_1),
-                   Strength          = if_else(Team_Winner == input$team, Strength_Winner, Strength_Loser),
-                   Strength_Opponent = if_else(Team_Winner == input$team, Strength_Loser, Strength_Winner),
-                   Rank              = if_else(Team_Winner == input$team, Rank_Winner, Rank_Loser),
-                   Rank_Opponent     = if_else(Team_Winner == input$team, Rank_Loser, Rank_Winner)) %>%
+                   Score_Opponent    = if_else(Team_1 == input$team, Score_2, Score_1)) %>%
+            left_join(ranking_round(),
+                      by = c("Team"="Team")) %>%
+            left_join(ranking_round(),
+                      by = c("Opponent"="Team"),
+                      suffix = c("", "_Opponent")) %>%
             mutate(Score_Difference_Expected = round(Strength - Strength_Opponent, digits = 2)) %>%
-            mutate(Score_Difference_Real = Score - Score_Opponent) %>% 
+            mutate(Score_Difference_Real = Score - Score_Opponent) %>%
             mutate(Algorithm_Error =
-                       Score_Difference_Expected - Score_Difference_Real)
+                       Score_Difference_Expected - Score_Difference_Real) %>%
+            mutate(Game = paste0(Team, ": ", Score,
+                                 " - ",
+                                 Opponent, ": ", Score_Opponent)) %>%
+            mutate(Game_Expected = paste0(Team, ": ",
+                                          round(Strength, digits = 2),
+                                          " - ",
+                                          Opponent, ": ",
+                                          round(Strength_Opponent, digits=2)))
     }
     )
     
