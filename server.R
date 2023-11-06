@@ -95,11 +95,15 @@ function(input, output, session) {
     })
     
     output$plot_real_vs_expected_overview <- renderPlotly({
+        req(input$teams_overview)
+        
         game_ranking_combined() %>%
             plot_real_vs_expected()
     })
     
     output$plot_ranking_overview <- renderPlotly({
+        req(input$teams_overview)
+        
         ranking_data %>% 
             filter(Division == input$division,
                    Round <= input$round) %>%
@@ -127,6 +131,7 @@ function(input, output, session) {
     })
     
     output$team_text <- renderText({
+        req(input$team)
         current_ranking <- ranking_data %>% filter(Team == input$team, Round == input$round)
         strength <- current_ranking %>% pull(Strength) %>% round(digits = 2)
         rank <- current_ranking %>% pull(Rank)
@@ -139,11 +144,15 @@ function(input, output, session) {
     })
     
     output$plot_real_vs_expected_team <- renderPlotly({
+        req(input$team)
+        
         game_ranking_one_team() %>%
             plot_real_vs_expected(x_lim = c(-15, 15), y_lim = c(-20, 20))
     })
     
     output$plot_ranking_team <- renderPlotly({
+        req(input$team)
+        
         number_teams <- ranking_data %>% filter(Division == input$division) %>%
             pull(Rank) %>% max()
         
@@ -159,12 +168,13 @@ function(input, output, session) {
     })
     
     output$team_games_table <- renderDataTable({
+        req(input$team)
         game_ranking_one_team() %>%
             select(-Strength, -Rank) %>%
             left_join(ranking_data, by=c("Team", "Round")) %>%
             mutate(Score = paste0(Score, " - ", Score_Opponent)) %>%
             select(Round, Team, Opponent, Score, Rank, Strength, Rank_Opponent, Strength_Opponent) %>%
-            DT::datatable(options = list(lengthChange = FALSE),
-                          rownames= FALSE)
+            DT::datatable(options = list(lengthChange = FALSE, searching = FALSE, paging = FALSE, info = FALSE),
+                          rownames= FALSE, escape = FALSE)
     })
 }
