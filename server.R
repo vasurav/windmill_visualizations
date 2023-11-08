@@ -12,9 +12,6 @@ library(shiny)
 # Define server logic required to draw a histogram
 function(input, output, session) {
     
-    game_data <- read_csv("data/game_data_2023.csv")
-    ranking_data <- read_csv("data/ranking_data_2023.csv")
-    
     ranking_round <- reactive({
         ranking_data %>% filter(Round == input$round,
                                 Division == input$division) %>%
