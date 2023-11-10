@@ -9,7 +9,7 @@ source("read_windmill.R")
 source("plot_windmill.R")
 source("string_functions.R")
 
-game_data <- read_csv("data/game_data_2023.csv")
+game_data <- read_csv("data/game_data_2023.csv") %>% mutate(Round = Round %>% case_match(9~8, .default = Round))
 ranking_data <- read_csv("data/ranking_data_2023.csv")
 
 
