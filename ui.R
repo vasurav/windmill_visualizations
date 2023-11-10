@@ -12,15 +12,7 @@ fluidPage(
                     min = 1, max = 8, value = 1, step = 1)),
     
      tabsetPanel(
-        tabPanel("Overview",
-                 inputPanel(
-                     uiOutput("teams_picker")
-                 ),
-                 fluidRow(
-                     column(6,plotlyOutput("plot_real_vs_expected_overview")),
-                     column(6,plotlyOutput("plot_ranking_overview"))
-                 )
-        ),
+        
         tabPanel("Team Explorer",
                  inputPanel(
                      uiOutput("team_select")
@@ -31,6 +23,15 @@ fluidPage(
                      column(6,plotlyOutput("plot_ranking_team"))
                      ),
                  dataTableOutput("team_games_table")
+        ),
+        tabPanel("Overview",
+                 inputPanel(
+                     uiOutput("teams_picker")
+                 ),
+                 fluidRow(
+                     column(6,plotlyOutput("plot_real_vs_expected_overview")),
+                     column(6,plotlyOutput("plot_ranking_overview"))
+                 )
         )
     )
 )
