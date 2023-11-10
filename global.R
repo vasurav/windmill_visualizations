@@ -5,8 +5,6 @@ library(shiny)
 library(shinyWidgets)
 library(DT)
 theme_set(theme_minimal())
-source("read_windmill.R")
-source("plot_windmill.R")
 
 game_data <- read_csv("data/game_data_2023.csv")
 ranking_data <- read_csv("data/ranking_data_2023.csv")
