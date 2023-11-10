@@ -109,9 +109,7 @@ function(input, output, session) {
                         filter(Division == input$division) %>% 
                         pull(Team) %>% unique() %>% 
                         sort(),
-                    selected = ranking_data %>% 
-                        filter(Division == input$division) %>% 
-                        pull(Team) %>% unique(),
+                    selected = NULL,
                     multiple = FALSE)
     })
     
@@ -150,6 +148,11 @@ function(input, output, session) {
             geom_point(aes(color=str_wrap(Opponent, 10))) +
             scale_y_reverse(limits = c(number_teams, 1)) +
             labs(color="Opponent")
+    })
+    
+    output$team_graph_explainer <- renderText({
+        req(input$team)
+        paste0(input$team, " outperformed the algorithm in blue games and underperformed the algorithm in red games.")
     })
     
     output$team_games_table <- renderDataTable({

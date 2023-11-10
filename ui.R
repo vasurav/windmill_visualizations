@@ -22,7 +22,14 @@ fluidPage(
                      column(6,plotlyOutput("plot_real_vs_expected_team")),
                      column(6,plotlyOutput("plot_ranking_team"))
                      ),
-                 dataTableOutput("team_games_table")
+                 fluidRow(
+                   column(12, textOutput("team_graph_explainer"), style="padding:25px;")
+                 ),
+                 fluidRow(
+                 column(12,dataTableOutput("team_games_table"))
+                 )
+                 
+                 
         ),
         tabPanel("Overview",
                  inputPanel(
