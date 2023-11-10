@@ -121,7 +121,7 @@ function(input, output, session) {
         algorithmic_error <- game_ranking_one_team() %>% pull(Algorithm_Error) %>% sum() %>% round(digits = 4)
         
         paste0("After Round ", input$round, ", ", input$team, " has strength of ", strength, 
-               ", which ranks them ", rank,
+               ". They are ranked ", rank,
                ". The total algorithmic error (over 0 means the algorithm is overestimating the team and less than 0 means the algorithm is underestimating the team) for the team is ", algorithmic_error, ".")
         
     })
