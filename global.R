@@ -14,3 +14,5 @@ source("plot_windmill.R")
 
 game_data <- get_all_windmill_data(FUN=read_windmill_game_data)
 ranking_data <- get_all_windmill_data(FUN=read_windmill_ranking_data, rounds=seq(1,8))
+
+enableBookmarking("url")
