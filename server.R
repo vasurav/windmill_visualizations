@@ -159,14 +159,7 @@ function(input, output, session) {
             left_join(ranking_data, by=c("Team", "Round")) %>%
             mutate(Score = paste0(Score, " - ", Score_Opponent)) %>%
             select(Round, Team, Opponent, Score, Rank, Strength, Rank_Opponent, Strength_Opponent) %>%
-            mutate(Opponent = paste0("<a href=/?_inputs_",
-                                     "&division=\"", input$division, "\"",
-                                     "&round=\"", input$round, "\"",
-                                     "&team=\"", Opponent %>% 
-                                         str_replace_all(" ", "%20") %>% 
-                                         str_replace_all("&", "%26"), "\"",
-                                     
-                                     ">",Opponent,"</a>")) %>% 
+            mutate(Opponent = team_str_to_link(Opponent, input)) %>% 
             DT::datatable(options = list(lengthChange = FALSE, searching = FALSE, paging = FALSE, info = FALSE),
                           rownames= FALSE, escape = FALSE)
     })
