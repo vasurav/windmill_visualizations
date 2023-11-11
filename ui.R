@@ -9,7 +9,7 @@ fluidPage(
         selectInput(inputId = "division", "Division:",
                     choices = c("Mixed", "Open", "Women"), selected = "Mixed"),
         sliderInput(inputId = "round", "Round:",
-                    min = 1, max = 8, value = 1, step = 1)),
+                    min = 1, max = 8, value = 8, step = 1)),
     
      tabsetPanel(
         
