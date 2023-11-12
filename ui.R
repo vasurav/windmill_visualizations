@@ -38,6 +38,9 @@ fluidPage(
                  fluidRow(
                      column(6,plotlyOutput("plot_real_vs_expected_overview")),
                      column(6,plotlyOutput("plot_ranking_overview"))
+                 ),
+                 fluidRow(
+                     column(12, div("The winning team outperformed the algorithm in blue games and underperformed the algorithm in red games", style="padding:25px;"))
                  )
         )
     )
