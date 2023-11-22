@@ -104,7 +104,7 @@ function(input, output, session) {
     
     #Team Explorer elements
     output$team_select <- renderUI({
-        selectInput(inputId = "team", "Team:", 
+        selectInput(inputId = "team", label=NULL,
                     choices = ranking_data %>% 
                         filter(Division == input$division) %>% 
                         pull(Team) %>% unique() %>% 
