@@ -12,7 +12,7 @@ plot_real_vs_expected <- function(game_ranking_data, x_lim = c(0,15), y_lim = c(
     )) +
     geom_jitter() +
     #scale_color_gradient2(low = "blue", mid="black", high="red") +
-    scale_color_gradientn(colors = c("blue", "white", "red"),
+    scale_color_gradientn(colors = c("blue", "black", "red"),
                           values = scales::rescale(breaks),
                           limits = range(breaks),
                           breaks = c(-15, 0, 15)) +
