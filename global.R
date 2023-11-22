@@ -3,13 +3,15 @@ library(plotly)
 library(jsonlite)
 library(shiny)
 library(shinyWidgets)
-library(shinythemes)
+# library(shinythemes)
 library(thematic)
 library(DT)
+library(bslib)
 theme_set(theme_minimal())
 source("read_windmill.R")
 source("plot_windmill.R")
 source("string_functions.R")
+
 
 thematic_shiny()
 
