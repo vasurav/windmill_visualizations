@@ -113,6 +113,34 @@ function(input, output, session) {
                     multiple = FALSE)
     })
     
+    output$team_name <- renderText({
+      req(input$team)
+      input$team
+    })
+    
+    output$team_strength <- renderText({
+      req(input$team)
+      ranking_data %>% 
+        filter(Team == input$team, Round == input$round) %>% 
+        pull(Strength) %>% 
+        round(digits = 2)
+    })
+    
+    output$team_rank <- renderText({
+      req(input$team)
+      ranking_data %>% 
+        filter(Team == input$team, Round == input$round) %>% 
+        pull(Rank)
+    })
+    
+    output$team_algo_error <- renderText({
+      req(input$team)
+      game_ranking_one_team() %>% 
+        pull(Algorithm_Error) %>% 
+        sum() %>% 
+        round(digits = 4)
+    })
+    
     output$team_text <- renderText({
         req(input$team)
         current_ranking <- ranking_data %>% filter(Team == input$team, Round == input$round)
