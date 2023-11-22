@@ -161,7 +161,7 @@ function(input, output, session) {
             select(-Strength, -Rank) %>%
             left_join(ranking_data, by=c("Team", "Round")) %>%
             mutate(Score = paste0(Score, " - ", Score_Opponent)) %>%
-            select(Round, Team, Opponent, Score, Rank, Strength, Rank_Opponent, Strength_Opponent) %>%
+            select(Round, Opponent, Score, Rank, Strength, Rank_Opponent, Strength_Opponent) %>%
             mutate(Opponent = team_str_to_link(Opponent, input)) %>% 
             DT::datatable(options = list(lengthChange = FALSE, searching = FALSE, paging = FALSE, info = FALSE),
                           rownames= FALSE, escape = FALSE, style="bootstrap")
