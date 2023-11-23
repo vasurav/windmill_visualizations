@@ -12,8 +12,6 @@ function(request){
                             choices = c("Mixed", "Open", "Women"), selected = "Mixed"),
                 sliderInput(inputId = "round", "Round:",
                             min = 1, max = 8, value = 8, step = 1),
-                #uiOutput("team_select"),
-                #uiOutput("teams_picker"),
               ),
               nav_panel(
                 title="Team Explorer",
@@ -23,7 +21,6 @@ function(request){
                                value_box(title="Strength",showcase=bs_icon("heart-half"),value=textOutput("team_strength")),
                                value_box(title="Algorithm Error", showcase=bs_icon("lightning-fill"), value=textOutput("team_algo_error"))
                                ),
-                #textOutput("team_text"),
                 layout_columns(widths = 1/3,
                                card(
                                  
@@ -39,9 +36,6 @@ function(request){
                                  ),
                                card(full_screen = T, plotlyOutput("plot_ranking_team"))
                        ),
-                # fluidRow(
-                #   column(12, textOutput("team_graph_explainer"), style="padding:25px;")
-                # ),
                 card(
                   dataTableOutput("team_games_table")
                 )
@@ -61,10 +55,6 @@ function(request){
                     plotlyOutput("plot_real_vs_expected_overview")),
                   card(plotlyOutput("plot_ranking_overview"))
                 ),
-                # fluidRow(
-                #   column(12, div("The winning team outperformed the algorithm in blue games and underperformed the algorithm in red games", style="padding:25px;"))
-                # )
-                
               )
   )
 }
