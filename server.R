@@ -67,7 +67,8 @@ function(input, output, session) {
     
     #Overview elements
    output$teams_picker <- renderUI({
-        pickerInput(inputId = "teams_overview", "Teams:", 
+        pickerInput(inputId = "teams_overview", "Teams:",
+                    width = "100%",
                     choices = ranking_data %>% 
                         filter(Division == input$division) %>% 
                         pull(Team) %>% unique() %>% 
@@ -104,7 +105,7 @@ function(input, output, session) {
     
     #Team Explorer elements
     output$team_select <- renderUI({
-        selectInput(inputId = "team", label=NULL,
+        selectInput(inputId = "team", label=NULL, width="100%",
                     choices = ranking_data %>% 
                         filter(Division == input$division) %>% 
                         pull(Team) %>% unique() %>% 
