@@ -1,12 +1,14 @@
 function(request){
     
-  page_navbar(theme = bs_theme(version=5,
-                               bg="#f9f8f5",
-                               fg="#000",
-                               primary="#0ad",
-                               "navbar-bg" = "#eb4",
-                               "navbar-text" = "#FFF"),
-              title = "Windmill Algorithm vs Real Data",
+  page_navbar(theme = 
+                bs_theme(
+                  bootswatch = "lux", version = 5,
+                  primary = "#0ae",
+                  secondary = "#e28a1b",
+                  "navbar-bg" = "#eb0",
+                  "navbar-text" = "#320"
+                ),
+  title = "Windmill Algorithm vs Real Data",
               sidebar=sidebar(
                 selectInput(inputId = "division", "Division:",
                             choices = c("Mixed", "Open", "Women"), selected = "Mixed"),
@@ -36,7 +38,7 @@ function(request){
                                  ),
                                card(full_screen = T, plotlyOutput("plot_ranking_team"))
                        ),
-                card(
+                card(tags$style('#team_games_table td {padding: 0}'),
                   dataTableOutput("team_games_table")
                 )
               ),
