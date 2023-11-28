@@ -8,7 +8,7 @@ function(request){
                   "navbar-bg" = "#eb0",
                   "navbar-text" = "#320"
                 ),
-  title = "Windmill Algorithm vs Real Data",
+  title = "Windmill",
               sidebar=sidebar(
                 selectInput(inputId = "division", "Division:",
                             choices = c("Mixed", "Open", "Women"), selected = "Mixed"),
