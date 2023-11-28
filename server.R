@@ -184,6 +184,20 @@ function(input, output, session) {
         paste0(input$team, " outperformed the algorithm in blue games and underperformed the algorithm in red games.")
     })
     
+    output$ranking_table <- DT::renderDT({
+      req(input$division)
+      
+      ranking_round() %>% 
+        arrange(Rank) %>% 
+        mutate(Strength = round(Strength, digits=2)) %>% 
+        mutate(Team = team_str_to_link(Team, input)) %>% 
+        select(Rank, Strength, Team) %>% 
+        datatable(options = list(lengthChange = FALSE, 
+                                 searching = FALSE, 
+                                 paging = FALSE, info = FALSE),
+                  rownames = F,escape = FALSE, style="bootstrap")
+    })
+    
     output$team_games_table <- DT::renderDT({
         req(input$team)
         game_ranking_one_team() %>%
