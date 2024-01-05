@@ -1,5 +1,5 @@
 team_str_to_link <- function(team_string, input) {
-  paste0("<a href=/?_inputs_",
+  paste0("<a href=?_inputs_",
          "&division=\"", input$division, "\"",
          "&round=\"", input$round, "\"",
          "&team=\"", team_string %>% 
